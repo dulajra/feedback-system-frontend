@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import Feedback from './Feedback';
-import {getAllFeedback, getCurrentPage, getPaginationMeta, isFeedbackLoading} from "../../views/FeedbackView/selectors";
+import {getAllFeedback, getCurrentPage, getPagination, isFeedbackLoading} from "../../views/FeedbackView/selectors";
 import {deleteFeedback, fetchAllFeedback, setCurrentPage} from "../../views/FeedbackView/actions";
 
 class FeedbackList extends React.Component {
@@ -22,6 +22,7 @@ class FeedbackList extends React.Component {
 
     handlePaginationChange = (event, page) => {
         this.props.setCurrentPage(page);
+        // this.props.fetchAllFeedback(page);
     };
 
     renderReviews() {
@@ -46,7 +47,7 @@ class FeedbackList extends React.Component {
                             <GridList cellHeight='auto' cols={1} spacing={4}>
                                 {this.renderReviews()}
                             </GridList>
-                            <Pagination count={this.props.pageCount} page={this.props.page}
+                            <Pagination count={this.props.pagination.totalPages} page={this.props.page}
                                         onChange={this.handlePaginationChange}/>
                         </div>
                 }
@@ -59,7 +60,7 @@ class FeedbackList extends React.Component {
 FeedbackList.propTypes = {
     allFeedback: PropTypes.array.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    pageCount: PropTypes.number.isRequired,
+    pagination: PropTypes.object.isRequired,
     page: PropTypes.number.isRequired,
     fetchAllFeedback: PropTypes.func.isRequired,
     deleteFeedback: PropTypes.func.isRequired,
@@ -70,7 +71,7 @@ export default connect(
     ({feedback}) => ({
         allFeedback: getAllFeedback(feedback),
         isLoading: isFeedbackLoading(feedback),
-        pageCount: getPaginationMeta(feedback).last ? parseInt(getPaginationMeta(feedback).last._page) : 1,
+        pagination: getPagination(feedback),
         page: getCurrentPage(feedback),
     }),
     {

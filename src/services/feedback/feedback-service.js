@@ -1,16 +1,12 @@
-// import parse from 'parse-link-header';
-
 const API_HOST = 'http://localhost:8080';
 const defaultOptions = {
     mode: 'cors',
 };
 
-export const getAllFeedback = async (page = 1, limit = 5) => {
+export const getAllFeedback = async (page = 1, size = 5) => {
     try {
-        const response = await window.fetch(`${API_HOST}/feedback?_page=${page}&_limit=${limit}`, defaultOptions);
-        // const link = parse(response.headers.get('Link'));
+        const response = await window.fetch(`${API_HOST}/feedback?page=${page}&size=${size}`, defaultOptions);
         const data = await response.json();
-        // return Promise.resolve({meta: {link}, data});
         return Promise.resolve(data);
     } catch (error) {
         console.error('Get all feedback failed: ', error);

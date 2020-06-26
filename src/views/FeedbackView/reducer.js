@@ -12,9 +12,17 @@ import {
 
 const initialState = {
     allFeedback: [],
-    pagination: {},
+    pagination: {
+        currentPage: 0,
+        pageSize: 5,
+        totalItems: 0,
+        totalPages: 0,
+    },
     currentPage: 1,
-    newFeedback: {},
+    newFeedback: {
+        rating: 0,
+        comment: '',
+    },
     saveFeedbackStatus: 'none',
     isFeedbackLoading: false,
 };
@@ -25,6 +33,7 @@ export const feedbackReducer = createReducer(initialState, {
         },
         [fetchAllFeedback.fulfilled]: (state, action) => {
             state.allFeedback = action.payload.data;
+            state.pagination = action.payload.meta;
             state.isFeedbackLoading = false;
         },
         [fetchAllFeedback.rejected]: (state, action) => {

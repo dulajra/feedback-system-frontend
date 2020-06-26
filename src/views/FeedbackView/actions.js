@@ -14,6 +14,6 @@ export const saveNewFeedback = createAsyncThunk('SAVE_NEW_FEEDBACK', (feedback) 
     return saveFeedback(feedback);
 });
 
-export const fetchAllFeedback = createAsyncThunk('FETCH_ALL_FEEDBACK', async () => {
-    return getAllFeedback();
+export const fetchAllFeedback = createAsyncThunk('FETCH_ALL_FEEDBACK', async (page) => {
+    return getAllFeedback(page);
 });
