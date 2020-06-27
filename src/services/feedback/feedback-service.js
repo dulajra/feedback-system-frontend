@@ -34,12 +34,11 @@ export const saveFeedback = async (feedback) => {
 
 export const deleteFeedback = async (id) => {
     try {
-        const response = await window.fetch(`${API_HOST}/feedback/${id}`,
+        await window.fetch(`${API_HOST}/feedback/${id}`,
             {
                 ...defaultOptions,
                 method: 'DELETE',
             });
-        return response.json();
     } catch (error) {
         console.error('Delete feedback failed: ', error);
         return Promise.reject(error);

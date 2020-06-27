@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import Feedback from './Feedback';
-import {getAllFeedback, getCurrentPage, getPagination, isFeedbackLoading} from "../../views/FeedbackView/selectors";
-import {deleteFeedback, fetchAllFeedback, setCurrentPage} from "../../views/FeedbackView/actions";
+import {getFeedbackList, getCurrentPage, getPagination, isFeedbackLoading} from "../../views/FeedbackView/selectors";
+import {fetchAllFeedback, removeFeedback, setCurrentPage} from "../../views/FeedbackView/actions";
 
 class FeedbackList extends React.Component {
 
@@ -22,18 +22,15 @@ class FeedbackList extends React.Component {
 
     handlePaginationChange = (event, page) => {
         this.props.setCurrentPage(page);
-        // this.props.fetchAllFeedback(page);
     };
 
     renderReviews() {
-        const feedbackItems = [];
-
-        this.props.allFeedback.forEach((feedback) => {
-            feedbackItems.push(<GridListTile key={feedback.id}><Feedback feedback={feedback}
-                                                                         deleteReview={this.props.deleteFeedback}/></GridListTile>);
+        return this.props.allFeedback.map((feedback) => {
+            return (
+                <GridListTile key={feedback.id}>
+                    <Feedback feedback={feedback} deleteFeedback={this.props.removeFeedback}/>
+                </GridListTile>);
         });
-
-        return feedbackItems;
     }
 
     render() {
@@ -63,20 +60,20 @@ FeedbackList.propTypes = {
     pagination: PropTypes.object.isRequired,
     page: PropTypes.number.isRequired,
     fetchAllFeedback: PropTypes.func.isRequired,
-    deleteFeedback: PropTypes.func.isRequired,
+    removeFeedback: PropTypes.func.isRequired,
     setCurrentPage: PropTypes.func.isRequired,
 };
 
 export default connect(
     ({feedback}) => ({
-        allFeedback: getAllFeedback(feedback),
+        allFeedback: getFeedbackList(feedback),
         isLoading: isFeedbackLoading(feedback),
         pagination: getPagination(feedback),
         page: getCurrentPage(feedback),
     }),
     {
         fetchAllFeedback,
-        deleteFeedback,
+        removeFeedback,
         setCurrentPage,
     }
 )(FeedbackList);

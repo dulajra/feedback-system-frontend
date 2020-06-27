@@ -11,7 +11,7 @@ import {
 } from "./actions";
 
 const initialState = {
-    allFeedback: [],
+    feedbackList: [],
     pagination: {
         currentPage: 0,
         pageSize: 5,
@@ -32,15 +32,15 @@ export const feedbackReducer = createReducer(initialState, {
             state.isFeedbackLoading = true;
         },
         [fetchAllFeedback.fulfilled]: (state, action) => {
-            state.allFeedback = action.payload.data;
-            state.pagination = action.payload.meta;
             state.isFeedbackLoading = false;
+            state.feedbackList = action.payload.data;
+            state.pagination = action.payload.meta;
         },
         [fetchAllFeedback.rejected]: (state, action) => {
             state.isFeedbackLoading = false;
         },
         [setPaginationMeta.type]: (state, action) => {
-            state.pagination = action.payload || {}
+            state.pagination = action.payload
         },
         [setNewFeedbackComment.type]: (state, action) => {
             state.newFeedback.comment = action.payload
