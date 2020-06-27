@@ -29,6 +29,10 @@ yarn start
 Hit [http://localhsot:3000](http://localhsot:3000) on your web browser.
 
 ### How to run with docker 
+#### Prerequisite
+1. Docker
+2. Docker Compose
+
 Set the following environment variables on the host machine.
 
 ```
