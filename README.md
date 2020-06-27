@@ -1,68 +1,60 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Feedback Frontend
+React Frontend for Feedback system. 
 
-## Available Scripts
+## Developer Guide 
+### How to run on local machine
+#### Prerequisite
+1. Node v10.x.x or higher (Should work with v8.x.x also - Not tested)
+2. Yarn
 
-In the project directory, you can run:
+Install node modules
 
-### `yarn start`
+```
+yarn 
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Set the following environment variables on the host machine. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```
+export REACT_APP_SERVICE_URL=http://localhost:8080
+```
 
-### `yarn test`
+Start the frontend in development mode
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+yarn start
+```
 
-### `yarn build`
+#### How to access
+Hit [http://localhsot:3000](http://localhsot:3000) on your web browser.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### How to run with docker 
+Set the following environment variables on the host machine.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+export SERVICE_URL=http://localhost:8080
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Start frontend container.
 
-### `yarn eject`
+```
+docker-compose -f CICD/docker/docker-compose.yml up --build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Use the following command if you want to run in background.
+ 
+```
+docker-compose -f CICD/docker/docker-compose.yml up --build -d
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Use the following command if you want to stop the containers running in the background.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+docker-compose -f CICD/docker/docker-compose.yml down
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### How to access
+Hit [http://localhsot:8888](http://localhsot:8888) on your web browser.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**Note:** When running without docker 3000 port is used. When running with docker 8888 port is used. 
+You can configure this in `/CICD/docker/docker-compose.yml` file. 
