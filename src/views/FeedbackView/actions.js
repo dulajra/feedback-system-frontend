@@ -3,6 +3,7 @@ import {createAction, createAsyncThunk} from '@reduxjs/toolkit'
 import {getCurrentPage, getFeedbackList, getPagination} from "./selectors";
 import {deleteFeedback, getAllFeedback, saveFeedback} from "../../services/feedback/feedback-service";
 
+export const setNewFeedback = createAction('SET_NEW_FEEDBACK');
 export const setNewFeedbackComment = createAction('SET_NEW_FEEDBACK_COMMENT');
 export const setNewFeedbackRating = createAction('SET_NEW_FEEDBACK_RATING');
 export const setSaveFeedbackStatus = createAction('SET_SAVE_FEEDBACK_STATUS');

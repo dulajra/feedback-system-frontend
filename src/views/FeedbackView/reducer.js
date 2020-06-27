@@ -3,12 +3,18 @@ import {createReducer} from '@reduxjs/toolkit';
 import {
     fetchAllFeedback,
     saveNewFeedback,
-    setCurrentPage,
+    setCurrentPage, setNewFeedback,
     setNewFeedbackComment,
     setNewFeedbackRating,
     setPaginationMeta,
     setSaveFeedbackStatus
 } from "./actions";
+
+const defaultFeedback = {
+    rating: 0,
+    name: '',
+    comment: '',
+};
 
 const initialState = {
     feedbackList: [],
@@ -19,10 +25,7 @@ const initialState = {
         totalPages: 0,
     },
     currentPage: 1,
-    newFeedback: {
-        rating: 0,
-        comment: '',
-    },
+    newFeedback: defaultFeedback,
     saveFeedbackStatus: 'none',
     isFeedbackLoading: false,
 };
@@ -42,6 +45,9 @@ export const feedbackReducer = createReducer(initialState, {
         [setPaginationMeta.type]: (state, action) => {
             state.pagination = action.payload
         },
+        [setNewFeedback.type]: (state, action) => {
+            state.newFeedback = action.payload
+        },
         [setNewFeedbackComment.type]: (state, action) => {
             state.newFeedback.comment = action.payload
         },
@@ -49,7 +55,7 @@ export const feedbackReducer = createReducer(initialState, {
             state.newFeedback.rating = action.payload
         },
         [saveNewFeedback.fulfilled]: (state, action) => {
-            state.newFeedback = {};
+            state.newFeedback = defaultFeedback;
             state.saveFeedbackStatus = 'success';
         },
         [saveNewFeedback.rejected]: (state, action) => {

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 
 import FeedbackRating from './FeedbackRating'
-import FeedbackComment from './FeedbackComment'
+import FeedbackBody from './FeedbackBody'
 import {validateFeedbackComment} from "./utils";
 import {getNewFeedback, getSaveFeedbackStatus} from "../../views/FeedbackView/selectors";
 import {saveNewFeedback, setSaveFeedbackStatus} from "../../views/FeedbackView/actions";
@@ -31,7 +31,7 @@ class FeedbackForm extends React.Component {
     render() {
         return (
             <form>
-                <FeedbackComment/>
+                <FeedbackBody/>
                 <FeedbackRating/>
                 <Button
                     variant="contained"
