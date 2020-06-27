@@ -1,5 +1,5 @@
 # Feedback Frontend
-React Frontend for Feedback system. 
+React Frontend for [Feedback System Backend](https://github.com/dulajra/feedback-system-backend). 
 
 ## Developer Guide 
 ### How to run on local machine
