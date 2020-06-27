@@ -7,7 +7,7 @@ React Frontend for Feedback system.
 1. Node v10.x.x or higher (Should work with v8.x.x also - Not tested)
 2. Yarn
 
-Install node modules
+Run the following command to install node modules
 
 ```
 yarn 
