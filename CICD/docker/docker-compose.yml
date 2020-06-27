@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+  feedback-frontend:
+    build:
+      context: ../../
+      dockerfile: CICD/docker/Dockerfile
+      args:
+        - REACT_APP_SERVICE_URL=${SERVICE_URL}
+    ports:
+      - 8888:5000

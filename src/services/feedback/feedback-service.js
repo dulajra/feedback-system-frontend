@@ -1,11 +1,11 @@
-const API_HOST = 'http://localhost:8080';
+const SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
 const defaultOptions = {
     mode: 'cors',
 };
 
 export const getAllFeedback = async (page = 1, size = 5) => {
     try {
-        const response = await window.fetch(`${API_HOST}/feedback?page=${page}&size=${size}`, defaultOptions);
+        const response = await window.fetch(`${SERVICE_URL}/feedback?page=${page}&size=${size}`, defaultOptions);
         const data = await response.json();
         return Promise.resolve(data);
     } catch (error) {
@@ -16,7 +16,7 @@ export const getAllFeedback = async (page = 1, size = 5) => {
 
 export const saveFeedback = async (feedback) => {
     try {
-        const response = await window.fetch(`${API_HOST}/feedback`,
+        const response = await window.fetch(`${SERVICE_URL}/feedback`,
             {
                 ...defaultOptions,
                 method: 'POST',
@@ -34,7 +34,7 @@ export const saveFeedback = async (feedback) => {
 
 export const deleteFeedback = async (id) => {
     try {
-        await window.fetch(`${API_HOST}/feedback/${id}`,
+        await window.fetch(`${SERVICE_URL}/feedback/${id}`,
             {
                 ...defaultOptions,
                 method: 'DELETE',
