@@ -26,7 +26,7 @@ yarn start
 ```
 
 #### How to access
-Hit [http://localhsot:3000](http://localhsot:3000) on your web browser.
+Hit [http://localhost:3000](http://localhost:3000) on your web browser.
 
 ### How to run with docker 
 #### Prerequisite
@@ -58,7 +58,7 @@ docker-compose -f CICD/docker/docker-compose.yml down
 ```
 
 #### How to access
-Hit [http://localhsot:8888](http://localhsot:8888) on your web browser.
+Hit [http://localhost:8888](http://localhost:8888) on your web browser.
 
 **Note:** When running without docker 3000 port is used. When running with docker 8888 port is used. 
 You can configure this in `/CICD/docker/docker-compose.yml` file. 
