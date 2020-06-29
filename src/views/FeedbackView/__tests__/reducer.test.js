@@ -21,7 +21,7 @@ const initialState = {
 };
 
 describe('views/FeedbackView reducer tests', () => {
-    describe('action tests', () => {
+    describe('FETCH_ALL_FEEDBACK', () => {
         it('test FETCH_ALL_FEEDBACK/pending', () => {
             const action = {
                 type: 'FETCH_ALL_FEEDBACK/pending',
@@ -71,27 +71,88 @@ describe('views/FeedbackView reducer tests', () => {
             const resultState = feedbackReducer(initialState, action);
             expect(resultState.isFeedbackLoading).toBe(false);
         });
+    });
 
-       /* it('test SET_NEW_REVIEW_BODY', () => {
-            const newReviewBody = 'This is a new review';
+    describe('SET_NEW_FEEDBACK', () => {
+        it('test SET_NEW_FEEDBACK', () => {
+            const payload = {
+                rating: 4,
+                name: 'John Doe',
+                comment: 'Really good product',
+            }
             const action = {
-                type: SET_NEW_REVIEW_BODY,
-                payload: newReviewBody,
+                type: 'SET_NEW_FEEDBACK',
+                payload,
             };
 
-            const resultState = reviewReducer(initialState, action);
-            expect(resultState.getIn(['newReview', 'body'])).toEqual(newReviewBody);
+            const resultState = feedbackReducer(initialState, action);
+            expect(resultState.newFeedback).toEqual(payload);
+        });
+    });
+
+    describe('SAVE_NEW_FEEDBACK', () => {
+        const newFeedback = {
+            rating: 4,
+            name: 'John Doe',
+            comment: 'Really good product',
+        }
+        let state;
+
+        beforeEach(() => {
+            const action = {
+                type: 'SET_NEW_FEEDBACK',
+                payload: newFeedback,
+            };
+
+            state = feedbackReducer(initialState, action);
         });
 
-        it('test SET_NEW_REVIEW_RATING', () => {
-            const newRating = 4;
+        it('test SAVE_NEW_FEEDBACK/fulfilled', () => {
             const action = {
-                type: SET_NEW_REVIEW_RATING,
-                payload: newRating,
+                type: 'SAVE_NEW_FEEDBACK/fulfilled',
+                payload: newFeedback,
             };
 
-            const resultState = reviewReducer(initialState, action);
-            expect(resultState.getIn(['newReview', 'rating'])).toEqual(newRating);
-        });*/
+            const resultState = feedbackReducer(state, action);
+            expect(resultState.newFeedback).toEqual(defaultFeedback);
+            expect(resultState.saveFeedbackStatus).toBe('success');
+        });
+
+        it('test SAVE_NEW_FEEDBACK/rejected', () => {
+            const action = {
+                type: 'SAVE_NEW_FEEDBACK/rejected',
+                payload: newFeedback,
+            };
+
+            const resultState = feedbackReducer(state, action);
+            expect(resultState.newFeedback).toEqual(newFeedback);
+            expect(resultState.saveFeedbackStatus).toBe('failed');
+        });
+    });
+
+    describe('SET_SAVE_FEEDBACK_STATUS', () => {
+        it('test SET_SAVE_FEEDBACK_STATUS', () => {
+            const payload = 'success'
+            const action = {
+                type: 'SET_SAVE_FEEDBACK_STATUS',
+                payload,
+            };
+
+            const resultState = feedbackReducer(initialState, action);
+            expect(resultState.saveFeedbackStatus).toBe(payload);
+        });
+    });
+
+    describe('SET_CURRENT_PAGE', () => {
+        it('test SET_CURRENT_PAGE', () => {
+            const payload = 1
+            const action = {
+                type: 'SET_CURRENT_PAGE',
+                payload,
+            };
+
+            const resultState = feedbackReducer(initialState, action);
+            expect(resultState.currentPage).toBe(payload);
+        });
     });
 });
