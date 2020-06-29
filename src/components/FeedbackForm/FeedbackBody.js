@@ -41,7 +41,7 @@ class FeedbackBody extends React.Component {
         });
     };
 
-    isReviewValid = () => {
+    isCommentValid = () => {
         return this.props.newFeedback.comment.length === 0 || validateFeedbackComment(this.props.newFeedback.comment);
     };
 
@@ -65,7 +65,7 @@ class FeedbackBody extends React.Component {
                     label="Review"
                     variant="outlined"
                     required
-                    error={!this.isReviewValid()}
+                    error={!this.isCommentValid()}
                     helperText={this.state.feedbackCommentHelperText}
                     placeholder={feedbackCommentPlaceHolder}
                     value={this.props.newFeedback.comment}

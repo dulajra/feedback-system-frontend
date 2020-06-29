@@ -52,7 +52,7 @@
     ],
     "coverageReporters": [
       "lcov",
-      "xml"
+      "text"
     ]
   }
 }
