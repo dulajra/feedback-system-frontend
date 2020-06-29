@@ -1,14 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 
-import {
-    fetchAllFeedback,
-    saveNewFeedback,
-    setCurrentPage, setNewFeedback,
-    setNewFeedbackComment,
-    setNewFeedbackRating,
-    setPaginationMeta,
-    setSaveFeedbackStatus
-} from "./actions";
+import {fetchAllFeedback, saveNewFeedback, setCurrentPage, setNewFeedback, setSaveFeedbackStatus} from "./actions";
 
 const defaultFeedback = {
     rating: 0,
@@ -42,17 +34,8 @@ export const feedbackReducer = createReducer(initialState, {
         [fetchAllFeedback.rejected]: (state, action) => {
             state.isFeedbackLoading = false;
         },
-        [setPaginationMeta.type]: (state, action) => {
-            state.pagination = action.payload
-        },
         [setNewFeedback.type]: (state, action) => {
             state.newFeedback = action.payload
-        },
-        [setNewFeedbackComment.type]: (state, action) => {
-            state.newFeedback.comment = action.payload
-        },
-        [setNewFeedbackRating.type]: (state, action) => {
-            state.newFeedback.rating = action.payload
         },
         [saveNewFeedback.fulfilled]: (state, action) => {
             state.newFeedback = defaultFeedback;

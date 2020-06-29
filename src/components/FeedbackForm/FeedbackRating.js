@@ -4,12 +4,15 @@ import PropTypes from 'prop-types'
 import {Rating} from '@material-ui/lab'
 import {FormLabel} from '@material-ui/core'
 import {getNewFeedback} from "../../views/FeedbackView/selectors";
-import {setNewFeedbackRating} from "../../views/FeedbackView/actions";
+import {setNewFeedback} from "../../views/FeedbackView/actions";
 
 class FeedbackRating extends React.Component {
 
     handleStarClick = (event, newValue) => {
-        this.props.setNewFeedbackRating(newValue);
+        this.props.setNewFeedback({
+            ...this.props.newFeedback,
+            rating: newValue,
+        });
     };
 
     render() {
@@ -19,7 +22,7 @@ class FeedbackRating extends React.Component {
                 <Rating
                     name="feedback-rating"
                     id="feedback-rating"
-                    value={this.props.newFeedbackRating}
+                    value={this.props.newFeedback.rating}
                     precision={1}
                     onChange={this.handleStarClick}
                 />
@@ -29,15 +32,15 @@ class FeedbackRating extends React.Component {
 }
 
 FeedbackRating.propTyoes = {
-    newFeedbackRating: PropTypes.number.isRequired,
-    setNewFeedbackRating: PropTypes.func.isRequired,
+    newFeedback: PropTypes.object.isRequired,
+    setNewFeedback: PropTypes.func.isRequired,
 };
 
 export default connect(
     ({feedback}) => ({
-        newFeedbackRating: parseInt(getNewFeedback(feedback).rating) || 0,
+        newFeedback: getNewFeedback(feedback),
     }),
     {
-        setNewFeedbackRating
+        setNewFeedback,
     }
 )(FeedbackRating);

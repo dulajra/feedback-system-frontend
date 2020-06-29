@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {TextField, FormControl} from '@material-ui/core'
+import {TextField} from '@material-ui/core'
 import {getNewFeedback} from "../../views/FeedbackView/selectors";
 import {FEEDBACK_COMMENT_MAX_LENGTH, validateFeedbackComment} from "./utils";
-import {setNewFeedbackComment, setNewFeedback} from "../../views/FeedbackView/actions";
+import {setNewFeedback} from "../../views/FeedbackView/actions";
 
 const feedbackCommentPlaceHolder = 'Leave your feedback here...';
 const feedbackNamePlaceHolder = 'Who you are? (Optional)';
@@ -79,7 +79,6 @@ class FeedbackBody extends React.Component {
 
 FeedbackBody.propTypes = {
     newFeedback: PropTypes.object.isRequired,
-    setNewFeedbackComment: PropTypes.func.isRequired,
     setNewFeedback: PropTypes.func.isRequired,
 };
 
@@ -88,7 +87,6 @@ export default connect(
         newFeedback: getNewFeedback(feedback),
     }),
     {
-        setNewFeedbackComment,
         setNewFeedback,
     }
 )

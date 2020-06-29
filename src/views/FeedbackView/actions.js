@@ -4,11 +4,8 @@ import {getCurrentPage, getFeedbackList, getPagination} from "./selectors";
 import {deleteFeedback, getAllFeedback, saveFeedback} from "../../services/feedback/feedback-service";
 
 export const setNewFeedback = createAction('SET_NEW_FEEDBACK');
-export const setNewFeedbackComment = createAction('SET_NEW_FEEDBACK_COMMENT');
-export const setNewFeedbackRating = createAction('SET_NEW_FEEDBACK_RATING');
 export const setSaveFeedbackStatus = createAction('SET_SAVE_FEEDBACK_STATUS');
 export const setCurrentPage = createAction('SET_CURRENT_PAGE');
-export const setPaginationMeta = createAction('SET_PAGINATION_META');
 
 export const saveNewFeedback = createAsyncThunk('SAVE_NEW_FEEDBACK', async (newFeedback, {dispatch, getState}) => {
     const res = await saveFeedback(newFeedback);
