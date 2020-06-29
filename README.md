@@ -62,3 +62,20 @@ Hit [http://localhost:8888](http://localhost:8888) on your web browser.
 
 **Note:** When running without docker 3000 port is used. When running with docker 8888 port is used. 
 You can configure this in `/CICD/docker/docker-compose.yml` file. 
+
+### How to execute unit tests
+
+Run unit tests in watch mode
+
+```
+yarn test
+```
+
+Run all unit tests with coverage
+
+```
+yarn test:coverage
+``` 
+
+After running the above command you can view the coverage report by opening 
+`feedback-frontend/coverage/lcov-report/index.html` file in your browser. 
